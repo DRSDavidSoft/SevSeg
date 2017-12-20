@@ -240,7 +240,6 @@ void SevSeg::refreshDisplay() {
       /**********************************************/
       // RESISTORS ON DIGITS, UPDATE WITHOUT DELAYS
 
-
       // Turn all lights off for the previous segment
       for (byte digitNum = 0 ; digitNum < numDigits ; digitNum++) {
         digitalWrite(digitPins[digitNum], digitOff);
@@ -263,7 +262,6 @@ void SevSeg::refreshDisplay() {
     else {
       /**********************************************/
       // RESISTORS ON SEGMENTS, UPDATE WITHOUT DELAYS
-
 
       // Turn all lights off for the previous digit
       for (byte segmentNum = 0 ; segmentNum < 8 ; segmentNum++) {
@@ -437,6 +435,7 @@ void SevSeg::setSegments(byte segs[])
 // Only alphanumeric characters plus '-' and ' ' are supported
 void SevSeg::setChars(char str[])
 {
+  // Clear all digits first
   for (byte digit = 0; digit < numDigits; digit++) {
     digitCodes[digit] = 0;
   }
@@ -506,7 +505,7 @@ void SevSeg::findDigits(long numToShow, char decPlaces, bool hex, byte digits[])
       numToShow -= digits[digitNum] * factor;
     }
 
-    // Find unnnecessary leading zeros and set them to BLANK
+    // Find unnecessary leading zeros and set them to BLANK
     if (decPlaces < 0) decPlaces = 0;
     if (!leadingZeros) {
       for (digitNum = 0 ; digitNum < (numDigits - 1 - decPlaces) ; digitNum++) {
